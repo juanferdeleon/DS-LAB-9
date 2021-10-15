@@ -1,5 +1,5 @@
 # Laboratorio 9: Visualización Dinámica. Visualizaciones Interactivas
-[![Build Status](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=darkgreen)](https://travis-ci.org/joemccann/dillinger)
+[![Build Status](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=darkgreen)](https://www.python.org/)
 
 ## Ejercicios
 - Elaborar dashboard que permita
