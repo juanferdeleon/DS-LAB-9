@@ -1,3 +1,4 @@
+#utf-
 '''
 
             Laboratorio 9.
@@ -27,9 +28,9 @@ app = Dash(__name__)
 
 # Open TXT files
 # en_us_test = open('test.txt', "r")
-en_us_blogs = open('en_US.blogs.txt', "r")
-en_us_news = open('en_US.news.txt', "r")
-en_us_twitter = open('en_US.twitter.txt', "r")
+en_us_blogs = open('test.txt', "r", encoding="utf8") # CHANGE THE NAME OF TXT FILES FOR THE CORRECT ONE
+en_us_news = open('test.txt', "r", encoding="utf8")
+en_us_twitter = open('test.txt', "r", encoding="utf8")
 
 # Read TXT files
 # en_us_test_text = en_us_test.readlines()
@@ -45,9 +46,9 @@ en_us_twitter.close()
 
 # Turn data into Dataframe
 data = {
-    "blogs": en_us_blogs,
-    "news": en_us_news,
-    "twitter": en_us_twitter,
+    "blogs": en_us_blogs_text,
+    "news": en_us_news_text,
+    "twitter": en_us_twitter_text,
 }
 df = pd.DataFrame(data=data)
 
