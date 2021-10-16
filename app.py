@@ -268,16 +268,20 @@ app.layout = html.Div([
 
     html.H1("Laboratorio 9", style={'text-align': 'center'}),
 
-    html.H3("Modelos de predicción",style={'text-align': 'center'}),
+    html.H2("Explore data", style={'text-align': 'center'}),
+    html.Button("NAVIGATE TO NEXT",id="next",n_clicks=0, style={'text-align': 'center', 'margin-left': 50, 'height': 50, 'width': 150, 'color': 'white', 'background': '#004AAD'}),
+    html.H3(random.choice(normalized[0] + normalized[1] + normalized[2]),id="data",style={'background':'#55ADEE','min-height':300, 'display': 'flex', 'align-items':'center','justify-content':'center', 'padding': 16, 'text-align': 'center','border':'double 2px black', 'color': 'white', 'margin-right': 50, 'margin-left': 50, 'align-self': 'center'}),
+
+    html.H2("Modelos de predicción",style={'text-align': 'center'}),
 
     dcc.Input(
         id="model",
         type="text",
-        style={'align-self': 'center','width': 500, 'height': 50},
+        style={'align-self': 'center','width': 500, 'height': 50, 'margin-left': 50,},
         placeholder="Escribe las palabras a predecir... ",
     ),
 
-    html.H5(id="model_catch",style={'color': 'red'}),
+    html.H5(id="model_catch",style={'color': 'red', 'margin-left': 50,}),
 
     dcc.Graph(id="model1"),
     dcc.Graph(id="model2"),
@@ -286,6 +290,13 @@ app.layout = html.Div([
     html.Br(),
 
 ])
+
+@app.callback(
+    Output("data", "children"),
+    Input('next', 'n_clicks'),
+)
+def update_result(n_clicks):
+    return random.choice(normalized[0] + normalized[1] + normalized[2])
 
 @app.callback(
     Output("model_catch", "children"),
