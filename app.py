@@ -13,6 +13,8 @@ Saul Contreras
 Juan Fernando De Leon Quezada
 '''
 
+from _plotly_utils.basevalidators import TitleValidator
+from dash.dcc.Graph import Graph
 import pandas as pd
 import plotly.express as px 
 import plotly.graph_objects as go
@@ -41,6 +43,10 @@ def normalize_data(data):
 app = Dash(__name__)
 
 # Import and clean data
+
+tweet_frequency = pd.read_csv('tweet_count.csv')
+blogs_frequency = pd.read_csv('blogs_count.csv')
+news_frequency = pd.read_csv('news_count.csv')
 
 # Open TXT files
 # en_us_test = open('test.txt', "r")
@@ -262,6 +268,7 @@ def prediction3(input1,input2):
   for word1 in model2[(input2)].keys():
     predictions[word1] = predictions[word1] + 1 if word1 in predictions else 1
   return predictions
+    
 
 # App Layout
 app.layout = html.Div([
@@ -286,6 +293,17 @@ app.layout = html.Div([
     dcc.Graph(id="model1"),
     dcc.Graph(id="model2"),
     dcc.Graph(id="model3"),
+
+    dcc.Dropdown(
+        id='freq-dropdown',
+        options=[
+            {'label': 'Tweets', 'value': 'tweets'},
+            {'label': 'Blogs', 'value': 'blogs'},
+            {'label': 'Noticias', 'value': 'news'}
+        ],
+        value='tweets'
+    ),
+    dcc.Graph(id="freq-hist"),
 
     html.Br(),
 
@@ -360,6 +378,27 @@ def update_result(model):
         fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 3 prediction")
         return fig
 
+@app.callback(
+    Output("freq-hist", "figure"), 
+    Input("freq-dropdown", "value"))
+def display_color(value):
+    if(value == "tweets"):
+        fig = px.histogram(tweet_frequency[:5], x="Word", y="Frequency", title="Palabras más frecuentes en tweets")
+        return fig
+    elif(value == "blogs"):
+        fig = px.histogram(blogs_frequency[:5], x="Word", y="Frequency", title="Palabras más frecuentes en Blogs")
+        return fig
+    elif(value == "news"):
+        fig = px.histogram(news_frequency[:5], x="Word", y="Frequency", title="Palabras más frecuentes en noticias")
+        return fig
+    else:
+        freq = pd.DataFrame(list(zip([], [])),columns =['Word', 'Frequency'])
+        fig = px.bar(freq, x="Word", y="Frequency", title="Seleccione un medio")
+        return fig
+        
+    
+    
+    
 
 
 # ------------------------------------------------------------------------------
