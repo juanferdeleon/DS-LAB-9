@@ -273,11 +273,11 @@ def prediction3(input1,input2):
 # App Layout
 app.layout = html.Div([
 
-    html.H1("Laboratorio 9", style={'text-align': 'center'}),
-
-    html.H2("Explore data", style={'text-align': 'center'}),
-    html.Button("NAVIGATE TO NEXT",id="next",n_clicks=0, style={'text-align': 'center', 'margin-left': 50, 'height': 50, 'width': 150, 'color': 'white', 'background': '#004AAD'}),
-    html.H3(random.choice(normalized[0] + normalized[1] + normalized[2]),id="data",style={'background':'#55ADEE','min-height':300, 'display': 'flex', 'align-items':'center','justify-content':'center', 'padding': 16, 'text-align': 'center','border':'double 2px black', 'color': 'white', 'margin-right': 50, 'margin-left': 50, 'align-self': 'center'}),
+    html.H1("Tweets, blogs y noticias en inglés", style={'text-align': 'center', 'family':'Verdana'}),
+    html.H3("Link: https://www.kaggle.com/crmercado/tweets-blogs-news-swiftkey-dataset-4million/", style={'text-align': 'center'}),
+    html.H3("El data set utilizado es una recopilación de tweets, blogs y noticias en inglés donde se hallaron las palabras mas utilizadas. Lo que se pretende hacer es poder hacer un análisis sobre los textos para poder determinar qué tipos de palabras son las que tienen mayor frecuencia en cada uno de los archivos, y determinar qué tanta presencia tienen estas", style={'text-align': 'center'}),
+    html.Button("NAVEGAR AL SIGUIENTE",id="next",n_clicks=0, style={'text-align': 'center', 'align-items':'center','justify-content':'center',  'height': 50, 'width': 150, 'color': 'white', 'background': '#004AAD'}),
+    html.H3(random.choice(normalized[0] + normalized[1] + normalized[2]),id="data",style={'background':'#55ADEE','min-height':300, 'display': 'flex', 'align-items':'center','justify-content':'center', 'padding': 16, 'text-align': 'center','border-radius': '10px', 'color': 'white', 'margin-right': 350, 'margin-left': 350, 'align-self': 'center'}),
 
     html.H2("Modelos de predicción",style={'text-align': 'center'}),
 
@@ -323,7 +323,7 @@ def update_result(n_clicks):
 def update_result(model):
     words = str(model).split(" ")
     if (len(words)!=2):
-        return "Write exactly two words."
+        return "Ingrese exactamente dos palabras."
     else:
         return ""
 
@@ -337,11 +337,11 @@ def update_result(model):
         predictions_1 = prediction(words[0],words[1])
         my_predictions1 = dict(sorted(predictions_1.items(), key=lambda item: item[1], reverse=True))
         prediction_ = pd.DataFrame(list(zip(my_predictions1.keys(), [item/10 for item in my_predictions1.values()])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 1 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo 1 predicción")
         return fig
     else:
         prediction_ = pd.DataFrame(list(zip([], [])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 1 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo 1 predicción")
         return fig
 
 @app.callback(
@@ -354,11 +354,11 @@ def update_result(model):
         predictions_1 = prediction2(words[0],words[1])
         my_predictions1 = dict(sorted(predictions_1.items(), key=lambda item: item[1], reverse=True))
         prediction_ = pd.DataFrame(list(zip(my_predictions1.keys(), [item/10 for item in my_predictions1.values()])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 2 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo 2 predicción")
         return fig
     else:
         prediction_ = pd.DataFrame(list(zip([], [])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 2 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo 2 predicción")
         return fig
 
 @app.callback(
@@ -371,11 +371,11 @@ def update_result(model):
         predictions_1 = prediction3(words[0],words[1])
         my_predictions1 = dict(sorted(predictions_1.items(), key=lambda item: item[1], reverse=True))
         prediction_ = pd.DataFrame(list(zip(my_predictions1.keys(), [item/10 for item in my_predictions1.values()])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 3 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo 3 predicción")
         return fig
     else:
         prediction_ = pd.DataFrame(list(zip([], [])),columns =['Word', 'Probabilty'])
-        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Model 3 prediction")
+        fig = px.bar(prediction_, x="Word", y="Probabilty", title="Modelo  predicción")
         return fig
 
 @app.callback(
