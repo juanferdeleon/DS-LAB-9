@@ -21,7 +21,11 @@ pip install -r requirements.txt
 ```sh
 python app.py
 ```
-
+After running the application, the output should look something like this
+```sh
+Dash is running on http://127.0.0.1:8050/
+```
+then just go into that URL with your favorite browser.
 
 ## Members:
 - Andrea Elías https://github.com/andreaeliasc
